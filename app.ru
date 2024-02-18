@@ -17,25 +17,29 @@ end
 
 ActiveRecord::Base.connection.execute("INSERT INTO users (name) VALUES ('John Doe')")
 
-class App < Rails::Application
-  config.load_defaults 7.1
-  config.root = __dir__
-  config.consider_all_requests_local = true
+module MyRails
+  class App < Rails::Application
+    config.load_defaults 7.1
+    config.root = __dir__
+    config.consider_all_requests_local = true
 
-  routes.append do
-    root to: 'application#index'
+    routes.append do
+      root to: 'my_rails/application#index'
+    end
+  end
+
+  class User < ActiveRecord::Base
+  end
+
+  class ApplicationController < ActionController::Base
+    def index
+      render json: { users: User.all }
+    end
   end
 end
 
-class User < ActiveRecord::Base
+MyRails::App.initialize!
+
+map "/api" do
+  run MyRails::App
 end
-
-class ApplicationController < ActionController::Base
-  def index
-    render json: { users: User.all }
-  end
-end
-
-App.initialize!
-
-run App
