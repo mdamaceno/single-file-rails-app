@@ -12,7 +12,7 @@ Clone this repo, get into the project directory and run:
 rackup app.ru
 ```
 
-Open the browser in http://localhost:9292.
+Open the browser in http://localhost:9292/api.
 
 You will see:
 

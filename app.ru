@@ -22,6 +22,7 @@ module MyRails
     config.load_defaults 7.1
     config.root = __dir__
     config.consider_all_requests_local = true
+    config.api_only = true
 
     routes.append do
       root to: 'my_rails/application#index'
