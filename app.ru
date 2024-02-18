@@ -1,20 +1,7 @@
-require 'bundler/inline'
-
-gemfile(true) do
-  source 'https://rubygems.org'
-
-  gem 'rails', '7.1.3'
-  gem 'rack', '2.2.8'
-  gem 'sqlite3'
-  gem 'puma'
-
-  group :development do
-    gem 'pry-rails'
-  end
-end
-
+require 'bundler/setup'
 require 'rails/all'
 
+Bundler.require(*Rails.groups)
 Rails.logger = Logger.new($stdout)
 
 database = "#{ENV.fetch('RACK_ENV')}.sqlite3"
